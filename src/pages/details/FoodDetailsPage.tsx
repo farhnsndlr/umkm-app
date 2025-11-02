@@ -38,7 +38,7 @@ const FoodDetailsPage: React.FC = () => {
 
   const handleContact = () => {
     if (!food || !food.phoneNumber) return;
-    const waUrl = `https://wa.me/${food.phoneNumber}`;
+    const waUrl = `https_://wa.me/${food.phoneNumber}`;
     window.open(waUrl, "_blank");
   };
 
@@ -66,7 +66,7 @@ const FoodDetailsPage: React.FC = () => {
           <div className="p-6 md:p-10">
             <h1 className="text-4xl font-bold text-gray-900">{food.title}</h1>
             <div className="flex items-center gap-2 my-3 text-gray-700">
-              <span className="font-bold text-lg">{food.rating}</span>
+              <span className="font-bold text-lg">{food.ratings}</span>
               <div className="flex text-yellow-500">
                 <FiStar fill="currentColor" />
                 <FiStar fill="currentColor" />
