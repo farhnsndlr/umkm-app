@@ -1,11 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  FiSearch,
-  FiX,
-  FiChevronDown,
-  FiMenu,
-} from 'react-icons/fi';
-import logoUmkm from '../../assets/images/logo-umkm.png';
+import React, { useState, useRef, useEffect } from "react";
+import { FiSearch, FiX, FiChevronDown, FiMenu } from "react-icons/fi";
+import logoUmkm from "../../assets/images/logo-umkm.png";
+import { Link } from "react-scroll";
 
 interface NavbarProps {
   isTransparent?: boolean;
@@ -17,11 +13,9 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
   const categoryMenuRef = useRef<HTMLDivElement>(null);
 
   const inputBg = isTransparent
-    ? 'bg-white/30 backdrop-blur-sm'
-    : 'bg-gray-100';
-  const borderColor = isTransparent
-    ? 'border-gray-400/50'
-    : 'border-gray-300';
+    ? "bg-white/30 backdrop-blur-sm"
+    : "bg-gray-100";
+  const borderColor = isTransparent ? "border-gray-400/50" : "border-gray-300";
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,9 +26,9 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
         setIsCategoryOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [categoryMenuRef]);
 
@@ -42,14 +36,15 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
     <>
       <header className="absolute top-0 left-0 z-30 w-full px-6 py-5 md:px-10 lg:px-12">
         <nav className="flex w-full items-center justify-between">
-          <a href="#" className="flex items-center gap-2 text-2xl font-bold text-gray-900">
-            <img
-              src={logoUmkm}
-              alt="UMKM-i Logo"
-              className="h-6 w-auto"
-            />
+          <Link
+            to="home"
+            smooth={true}
+            duration={500}
+            className="flex items-center gap-2 text-2xl font-bold text-gray-900 cursor-pointer"
+          >
+            <img src={logoUmkm} alt="UMKM-i Logo" className="h-6 w-auto" />
             <span>UMKM-i</span>
-          </a>
+          </Link>
 
           <div className="relative hidden w-full max-w-sm lg:block">
             <input
@@ -64,9 +59,14 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
           </div>
 
           <div className="hidden items-center gap-8 lg:flex">
-            <a href="#" className="text-lg font-medium text-gray-700 hover:text-black">
+            <Link
+              to="home"
+              smooth={true}
+              duration={500}
+              className="text-lg font-medium text-gray-700 hover:text-black cursor-pointer"
+            >
               Home
-            </a>
+            </Link>
 
             <div className="relative" ref={categoryMenuRef}>
               <button
@@ -76,33 +76,53 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                 <span>Category</span>
                 <FiChevronDown
                   className={`h-5 w-5 transition-transform ${
-                    isCategoryOpen ? 'rotate-180' : ''
+                    isCategoryOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
-              {isCategoryOpen && (
-                <div className="absolute top-full right-0 mt-3 w-52 z-50">
-                  <a
-                    href="#"
-                    className="mb-2 block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark"
-                  >
-                    Makanan
-                  </a>
-                  <a
-                    href="#"
-                    className="mb-2 block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark"
-                  >
-                    Minuman
-                  </a>
-                  <a
-                    href="#"
-                    className="block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark"
-                  >
-                    Jasa
-                  </a>
-                </div>
-              )}
+              <div
+                className={`
+                  absolute top-full right-0 mt-3 w-52 z-50 origin-top-right
+                  transition-all duration-200 ease-out
+                  ${
+                    isCategoryOpen
+                      ? "opacity-100 scale-100 visible"
+                      : "opacity-0 scale-95 invisible"
+                  }
+                `}
+              >
+                <Link
+                  to="makanan"
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  onClick={() => setIsCategoryOpen(false)}
+                  className="mb-2 block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
+                >
+                  Makanan
+                </Link>
+                <Link
+                  to="minuman"
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  onClick={() => setIsCategoryOpen(false)}
+                  className="mb-2 block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
+                >
+                  Minuman
+                </Link>
+                <Link
+                  to="jasa"
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  onClick={() => setIsCategoryOpen(false)}
+                  className="block w-full rounded-lg bg-brand-brown px-4 py-3 text-center text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
+                >
+                  Jasa
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -120,8 +140,8 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
       </header>
 
       <div
-        className={`fixed top-0 left-0 z-40 h-screen w-full transform bg-white p-6 pt-24 shadow-xl transition-transform duration-300 ease-in-out lg:hidden ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 z-40 h-screen w-full transform bg-bg-main p-6 pt-24 shadow-xl transition-transform duration-300 ease-in-out lg:hidden ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="relative w-full mb-6">
@@ -137,10 +157,19 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
         </div>
 
         <nav className="flex flex-col gap-6">
-          <a href="#" className="text-xl font-medium text-gray-800 hover:text-brand-brown">
+          <Link
+            to="home"
+            smooth={true}
+            duration={500}
+            onClick={() => setIsMenuOpen(false)}
+            className="text-xl font-medium text-gray-800 hover:text-brand-brown cursor-pointer"
+          >
             Home
-          </a>
-          <a href="#" className="flex items-center justify-between text-xl font-medium text-gray-800 hover:text-brand-brown">
+          </Link>
+          <a
+            href="#"
+            className="flex items-center justify-between text-xl font-medium text-gray-800 hover:text-brand-brown"
+          >
             <span>Category</span>
             <FiChevronDown className="h-5 w-5" />
           </a>
