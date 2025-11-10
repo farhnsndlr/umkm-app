@@ -1,3 +1,44 @@
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #faf7f0;
+  transition: opacity 1s ease-out;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes bounce-dot {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.spinner {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background-color: #5d4037;
+  animation: bounce-dot 1s infinite;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

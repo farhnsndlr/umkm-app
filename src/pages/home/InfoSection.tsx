@@ -29,7 +29,10 @@ const serviceData = [
 
 const InfoSection: React.FC = () => {
   return (
-    <section className="bg-bg-main py-20 px-6 md:px-10 lg:px-12">
+    <section
+      id="info-section"
+      className="bg-bg-main py-20 px-6 md:px-10 lg:px-12"
+    >
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900 mb-3">Layanan Kami</h2>
         <p className="text-lg text-gray-600">

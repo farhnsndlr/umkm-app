@@ -8,7 +8,7 @@ const FoodSection: React.FC = () => {
     <section className="bg-bg-main py-20 px-6 md:px-10 lg:px-12">
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900">
-          Rekomendasi Makanan Di Sekitar Mu
+          Rekomendasi Makanan Di Sekitarmu
         </h2>
       </div>
 
