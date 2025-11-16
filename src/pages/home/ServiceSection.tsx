@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 
 const ServiceSection: React.FC = () => {
   return (
-    <section id="jasa" className="bg-bg-main py-20 px-6 md:px-10 lg:px-12">
+    <section
+      className="bg-bg-main py-20 px-6 md:px-10 lg:px-12"
+    >
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900">
           Rekomendasi Jasa Di Sekitarmu

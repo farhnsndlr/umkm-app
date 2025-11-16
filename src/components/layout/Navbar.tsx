@@ -118,9 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
     e.preventDefault();
 
     if (activeIndex > -1 && suggestions[activeIndex]) {
-      navigate(
-        `/${suggestions[activeIndex].slug}`
-      );
+      navigate(`/${suggestions[activeIndex].slug}`);
     } else if (suggestions.length > 0) {
       navigate(`/${suggestions[0].slug}`);
     } else {
@@ -281,7 +279,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               >
                 <div className="mt-3 bg-brand-brown rounded-lg shadow-xl overflow-hidden">
                   <Link
-                    to="rekomendasi"
+                    to="makanan"
                     smooth={true}
                     duration={500}
                     offset={-80}
@@ -292,7 +290,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                     <span>Makanan</span>
                   </Link>
                   <Link
-                    to="rekomendasi"
+                    to="minuman"
                     smooth={true}
                     duration={500}
                     offset={-80}
@@ -303,7 +301,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                     <span>Minuman</span>
                   </Link>
                   <Link
-                    to="rekomendasi"
+                    to="jasa"
                     smooth={true}
                     duration={500}
                     offset={-80}
@@ -399,7 +397,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
             >
               <div className="bg-brand-brown rounded-lg shadow-lg overflow-hidden">
                 <Link
-                  to="rekomendasi"
+                  to="makanan"
                   smooth={true}
                   duration={500}
                   offset={-80}
@@ -410,7 +408,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                   <span>Makanan</span>
                 </Link>
                 <Link
-                  to="rekomendasi"
+                  to="minuman"
                   smooth={true}
                   duration={500}
                   offset={-80}
@@ -421,7 +419,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                   <span>Minuman</span>
                 </Link>
                 <Link
-                  to="rekomendasi"
+                  to="jasa"
                   smooth={true}
                   duration={500}
                   offset={-80}
