@@ -1,4 +1,4 @@
-# 🚀 UMKM-i: Direktori UMKM Modern
+# 🚀 UMKM-i
 
 
 ## 🔗 Live Demo  
