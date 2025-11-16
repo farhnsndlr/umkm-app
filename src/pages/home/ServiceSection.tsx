@@ -1,19 +1,19 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
-import { serviceData } from "../../data/serviceData";
+import { serviceData } from "../../data/serviceData.js";
 import { Link } from "react-router-dom";
 
 const ServiceSection: React.FC = () => {
   return (
-    <section className="bg-bg-main py-20 px-6 md:px-10 lg:px-12">
+    <section id="jasa" className="bg-bg-main py-20 px-6 md:px-10 lg:px-12">
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900">
           Rekomendasi Jasa Di Sekitarmu
         </h2>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {serviceData.map((item) => (
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        {serviceData.slice(0, 2).map((item) => (
           <Link
             to={`/service/${item.slug}`}
             key={item.id}
@@ -25,7 +25,7 @@ const ServiceSection: React.FC = () => {
             <img
               src={item.imageSrc}
               alt={item.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-56 object-cover"
             />
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-2">{item.title}</h3>

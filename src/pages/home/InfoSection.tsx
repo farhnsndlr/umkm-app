@@ -4,26 +4,23 @@ const serviceData = [
   {
     id: 1,
     icon: "/icon1.png",
-    title: "Informasi Umkm",
+    title: "Jelajahi UMKM",
     description:
-      "Mari biasakan untuk membeli produk UMKM sebagai wujud dukungan kita pada pelaku usaha kecil menengah di Indonesia.",
-    isPrimary: true,
+      "Telusuri direktori lengkap kami untuk menemukan produk dan jasa unik dari UMKM terbaik di sekitar Anda.",
   },
   {
     id: 2,
     icon: "/icon2.png",
-    title: "Lokasi",
+    title: "Navigasi Cerdas",
     description:
-      "Temukan warung kami di lokasi strategis yang mudah dijangkau, tempat kumpul favorit untuk semua.",
-    isPrimary: false,
+      "Dapatkan arahan instan. Peta interaktif kami memandu Anda langsung ke pintu UMKM favorit Anda tanpa repot.",
   },
   {
     id: 3,
     icon: "/icon3.png",
-    title: "Tampilan Umkm",
+    title: "Sorotan UMKM",
     description:
-      "Mari biasakan untuk membeli produk UMKM sebagai wujud dukungan kita pada pelaku usaha kecil menengah.",
-    isPrimary: false,
+      "Lihat apa yang sedang populer. Kami mengurasi UMKM unggulan dan rekomendasi terbaik khusus untuk Anda.",
   },
 ];
 
@@ -36,7 +33,7 @@ const InfoSection: React.FC = () => {
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900 mb-3">Layanan Kami</h2>
         <p className="text-lg text-gray-600">
-          Umkm Kami Hadir Menjadi Solusi Bagi Anda
+          UMKM Kami Hadir Menjadi Solusi Bagi Anda
         </p>
       </div>
 
@@ -47,12 +44,13 @@ const InfoSection: React.FC = () => {
             className="group rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300
                        bg-white text-gray-800
                        hover:shadow-2xl hover:-translate-y-2
-                       hover:bg-brand-brown hover:text-white"
+                       hover:bg-brand-brown hover:text-white
+                       h-full"
           >
             <img
               src={service.icon}
               alt={`${service.title} icon`}
-              className="h-20 w-20 mb-6"
+              className="h-16 w-16 object-contain mb-6"
             />
             <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
             <p className="text-sm text-gray-600 group-hover:text-gray-200">

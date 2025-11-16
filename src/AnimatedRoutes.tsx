@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-import App from "./App.tsx";
-import FoodDetailsPage from "./pages/details/FoodDetailsPage.tsx";
+import App from "./App.js";
+import ItemDetailsPage from "./pages/details/ItemDetailsPage.js";
 
 const pageTransition = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
-  transition: { duration: 0.4, ease: "easeInOut" },
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  transition: { duration: 0.3, ease: "easeOut" },
 };
 
 const AnimatedRoutes: React.FC = () => {
@@ -64,7 +64,33 @@ const AnimatedRoutes: React.FC = () => {
               exit="exit"
               variants={pageTransition}
             >
-              <FoodDetailsPage />
+              <ItemDetailsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/drink/:slug"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageTransition}
+            >
+              <ItemDetailsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/service/:slug"
+          element={
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageTransition}
+            >
+              <ItemDetailsPage />
             </motion.div>
           }
         />

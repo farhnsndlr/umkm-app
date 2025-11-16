@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../../components/layout/Navbar";
-import HeroSection from "./HeroSection";
-import DisplaySection from "./DisplaySection";
-import ServiceSection from "./ServiceSection";
-import FoodSection from "./FoodSection";
-import DrinkSection from "./DrinkSection";
-import InfoSection from "./InfoSection";
-import FadeInOnScroll from "../../components/FadeInOnScroll";
+import Navbar from "../../components/layout/Navbar.js";
+import HeroSection from "./HeroSection.js";
+import DisplaySection from "./DisplaySection.js";
+import ServiceSection from "./ServiceSection.js";
+import FoodSection from "./FoodSection.js";
+import DrinkSection from "./DrinkSection.js";
+import InfoSection from "./InfoSection.js";
+import FadeInOnScroll from "../../components/FadeInOnScroll.js";
 
 const HomePage: React.FC = () => {
   return (

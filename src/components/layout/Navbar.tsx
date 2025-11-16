@@ -1,12 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FiSearch, FiX, FiChevronDown, FiMenu } from "react-icons/fi";
+import {
+  FiSearch,
+  FiX,
+  FiChevronDown,
+  FiMenu,
+  FiShoppingBag,
+  FiCoffee,
+  FiTool,
+} from "react-icons/fi";
 import logoUmkm from "../../assets/images/logo-umkm.jpeg";
 import { Link } from "react-scroll";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { foodData } from "../../data/foodData";
+import { foodData } from "../../data/foodData.js";
+import { drinkData } from "../../data/drinkData.js";
+import { serviceData } from "../../data/serviceData.js";
 
 type FoodItem = (typeof foodData)[0];
 type SuggestionType = "search" | "random";
+
+const allData = [
+  ...foodData.map((item) => ({ ...item, type: "food" })),
+  ...drinkData.map((item) => ({ ...item, type: "drink" })),
+  ...serviceData.map((item) => ({ ...item, type: "service" })),
+];
 
 interface NavbarProps {
   isTransparent?: boolean;
@@ -28,14 +44,10 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
   const desktopSearchRef = useRef<HTMLFormElement>(null);
   const mobileSearchRef = useRef<HTMLFormElement>(null);
 
-  const inputBg =
-    isTransparent && !isScrolled && !isMenuOpen
-      ? "bg-white/30 backdrop-blur-sm"
-      : "bg-gray-100";
-  const borderColor =
-    isTransparent && !isScrolled && !isMenuOpen
-      ? "border-gray-400/50"
-      : "border-gray-300";
+  const showSolidBg = isScrolled || isMenuOpen || !isTransparent;
+
+  const inputBg = !showSolidBg ? "bg-white/30 backdrop-blur-sm" : "bg-white";
+  const borderColor = !showSolidBg ? "border-gray-400/50" : "border-gray-300";
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -78,7 +90,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
     setSuggestionType("search");
 
     if (newQuery.trim().length > 0) {
-      const matches = foodData.filter((item) =>
+      const matches = allData.filter((item) =>
         item.title.toLowerCase().includes(newQuery.toLowerCase())
       );
       setSuggestions(matches);
@@ -91,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
 
   const handleFocus = () => {
     if (searchQuery.trim().length === 0) {
-      const randomSuggestions = [...foodData]
+      const randomSuggestions = [...allData]
         .sort(() => 0.5 - Math.random())
         .slice(0, 3);
       setSuggestions(randomSuggestions);
@@ -106,9 +118,11 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
     e.preventDefault();
 
     if (activeIndex > -1 && suggestions[activeIndex]) {
-      navigate(`/food/${suggestions[activeIndex].slug}`);
+      navigate(
+        `/${suggestions[activeIndex].slug}`
+      );
     } else if (suggestions.length > 0) {
-      navigate(`/food/${suggestions[0].slug}`);
+      navigate(`/${suggestions[0].slug}`);
     } else {
       alert("UMKM tidak ditemukan.");
       return;
@@ -158,7 +172,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
           const isHighlighted = index === activeIndex;
           return (
             <RouterLink
-              to={`/food/${item.slug}`}
+              to={`/${item.slug}`}
               key={item.id}
               onClick={handleSuggestionClick}
               onMouseEnter={() => setActiveIndex(index)}
@@ -177,8 +191,6 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
       </div>
     );
   };
-
-  const showSolidBg = isScrolled || isMenuOpen || !isTransparent;
 
   return (
     <>
@@ -237,7 +249,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               to="home"
               smooth={true}
               duration={500}
-              className="text-lg font-medium text-gray-700 hover:text-black cursor-pointer"
+              className="text-lg font-medium text-gray-900 hover:text-black cursor-pointer"
             >
               Home
             </Link>
@@ -247,7 +259,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               onMouseEnter={() => setIsCategoryOpen(true)}
               onMouseLeave={() => setIsCategoryOpen(false)}
             >
-              <button className="flex items-center gap-1 text-lg font-medium text-gray-700 hover:text-black">
+              <button className="flex items-center gap-1 text-lg font-medium text-gray-900 hover:text-black">
                 <span>Category</span>
                 <FiChevronDown
                   className={`h-5 w-5 transition-transform ${
@@ -269,34 +281,37 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               >
                 <div className="mt-3 bg-brand-brown rounded-lg shadow-xl overflow-hidden">
                   <Link
-                    to="makanan"
+                    to="rekomendasi"
                     smooth={true}
                     duration={500}
                     offset={-80}
                     onClick={() => setIsCategoryOpen(false)}
-                    className="block w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
+                    className="flex items-center justify-start gap-3 w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
                   >
-                    Makanan
+                    <FiShoppingBag className="h-5 w-5" />
+                    <span>Makanan</span>
                   </Link>
                   <Link
-                    to="minuman"
+                    to="rekomendasi"
                     smooth={true}
                     duration={500}
                     offset={-80}
                     onClick={() => setIsCategoryOpen(false)}
-                    className="block w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
+                    className="flex items-center justify-start gap-3 w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
                   >
-                    Minuman
+                    <FiCoffee className="h-5 w-5" />
+                    <span>Minuman</span>
                   </Link>
                   <Link
-                    to="jasa"
+                    to="rekomendasi"
                     smooth={true}
                     duration={500}
                     offset={-80}
                     onClick={() => setIsCategoryOpen(false)}
-                    className="block w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
+                    className="flex items-center justify-start gap-3 w-full px-5 py-3 text-left text-base font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
                   >
-                    Jasa
+                    <FiTool className="h-5 w-5" />
+                    <span>Jasa</span>
                   </Link>
                 </div>
               </div>
@@ -360,7 +375,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
             smooth={true}
             duration={500}
             onClick={() => setIsMenuOpen(false)}
-            className="text-xl font-medium text-gray-800 hover:text-brand-brown cursor-pointer p-3 rounded-lg hover:bg-gray-200"
+            className="text-xl font-medium text-gray-900 cursor-pointer p-3 rounded-lg hover:bg-gray-200"
           >
             Home
           </Link>
@@ -368,7 +383,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
           <div className="w-full">
             <button
               onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
-              className="w-full flex items-center justify-between text-xl font-medium text-gray-800 hover:text-brand-brown cursor-pointer p-3 rounded-lg hover:bg-gray-200"
+              className="w-full flex items-center justify-between text-xl font-medium text-gray-900 cursor-pointer p-3 rounded-lg hover:bg-gray-200"
             >
               <span>Category</span>
               <FiChevronDown
@@ -384,34 +399,37 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
             >
               <div className="bg-brand-brown rounded-lg shadow-lg overflow-hidden">
                 <Link
-                  to="makanan"
+                  to="rekomendasi"
                   smooth={true}
                   duration={500}
                   offset={-80}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
+                  className="flex items-center justify-start gap-3 w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
                 >
-                  Makanan
+                  <FiShoppingBag className="h-5 w-5" />
+                  <span>Makanan</span>
                 </Link>
                 <Link
-                  to="minuman"
+                  to="rekomendasi"
                   smooth={true}
                   duration={500}
                   offset={-80}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
+                  className="flex items-center justify-start gap-3 w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer border-b border-brand-brown-dark"
                 >
-                  Minuman
+                  <FiCoffee className="h-5 w-5" />
+                  <span>Minuman</span>
                 </Link>
                 <Link
-                  to="jasa"
+                  to="rekomendasi"
                   smooth={true}
                   duration={500}
                   offset={-80}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
+                  className="flex items-center justify-start gap-3 w-full px-5 py-4 text-left text-lg font-medium text-white transition hover:bg-brand-brown-dark cursor-pointer"
                 >
-                  Jasa
+                  <FiTool className="h-5 w-5" />
+                  <span>Jasa</span>
                 </Link>
               </div>
             </div>

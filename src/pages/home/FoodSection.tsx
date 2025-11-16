@@ -1,6 +1,6 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
-import { foodData } from "../../data/foodData";
+import { foodData } from "../../data/foodData.js";
 import { Link } from "react-router-dom";
 
 const FoodSection: React.FC = () => {

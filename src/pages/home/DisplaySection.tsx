@@ -1,125 +1,98 @@
-import { useState } from "react";
+import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
 
-const DisplaySection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
-  const minSwipeDistance = 50;
+const slides = [
+  {
+    image: "../../Makanan/bakso-citra.jpg",
+    title: "Bakso Malang Citra Margonda",
+  },
+  {
+    image: "../../Jasa/gwapo.jpeg",
+    title: "Gwapo",
+  },
+  {
+    image: "../../Minuman/ce-hun-tiaw.png",
+    title: "Es Ce Hun Tiaw",
+  },
+  {
+    image: "../../Jasa/laundry-rakyat.jpg",
+    title: "Laundry Rakyat",
+  },
+];
 
-  const slides = [
-    {
-      image:
-        "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&h=600&fit=crop",
-      title: "Makanan",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&h=600&fit=crop",
-      title: "Barbershop",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=800&h=600&fit=crop",
-      title: "Minuman",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1610970881699-44a587cabec?w=800&h=600&fit=crop",
-      title: "Loundry",
-    },
-  ];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      prevSlide();
-    }
-
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
-
+const DisplaySection: React.FC = () => {
   return (
-    <section className="bg-bg-main py-16">
+    <section id="display-section" className="bg-bg-main py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-amber-900 mb-2">
-            Tamiplan UMKM-i
+          <h2 className="text-4xl font-bold text-gray-900 mb-2">
+            Tampilan UMKM-i
           </h2>
-          <p className="text-amber-700">Temukan UMKM Pilihan Anda</p>
+          <p className="text-center mb-12 max-w-2xl mx-auto text-gray-700">Temukan UMKM Pilihan Anda</p>
         </div>
       </div>
 
-      <div
-        className="relative"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        <div className="relative h-96 overflow-hidden shadow-2xl">
-          <img
-            src={slides[currentSlide].image}
-            alt={slides[currentSlide].title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <h3 className="absolute bottom-8 left-8 text-white text-4xl font-bold px-6 md:px-10 lg:px-12">
-            {slides[currentSlide].title}
-          </h3>
-        </div>
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          navigation={{
+            prevEl: ".display-prev-btn",
+            nextEl: ".display-next-btn",
+          }}
+          spaceBetween={24}
+          slidesPerView={1}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+          }}
+          className="!pb-4"
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative h-96 overflow-hidden rounded-lg shadow-lg">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <h3 className="absolute bottom-8 left-8 text-white text-4xl font-bold">
+                  {slide.title}
+                </h3>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         <button
-          onClick={prevSlide}
-          className="absolute left-6 md:left-10 lg:left-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition transform hover:scale-110 z-10"
+          className="display-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition transform hover:scale-110 z-10"
           aria-label="Previous slide"
         >
           <ChevronLeft size={28} className="text-amber-900" />
         </button>
         <button
-          onClick={nextSlide}
-          className="absolute right-6 md:right-10 lg:right-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition transform hover:scale-110 z-10"
+          className="display-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition transform hover:scale-110 z-10"
           aria-label="Next slide"
         >
           <ChevronRight size={28} className="text-amber-900" />
         </button>
-
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${
-                currentSlide === index ? "bg-white w-8" : "bg-white/50 w-2"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
