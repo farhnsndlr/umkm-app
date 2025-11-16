@@ -15,7 +15,7 @@ import { foodData } from "../../data/foodData.js";
 import { drinkData } from "../../data/drinkData.js";
 import { serviceData } from "../../data/serviceData.js";
 
-type FoodItem = (typeof foodData)[0];
+type FoodItem = (typeof foodData)[0] & { type: string };
 type SuggestionType = "search" | "random";
 
 const allData = [
@@ -170,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
           const isHighlighted = index === activeIndex;
           return (
             <RouterLink
-              to={`/${item.slug}`}
+              to={`/${item.type}/${item.slug}`}
               key={item.id}
               onClick={handleSuggestionClick}
               onMouseEnter={() => setActiveIndex(index)}
