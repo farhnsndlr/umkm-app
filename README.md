@@ -102,4 +102,4 @@ Buka: http://localhost:5173
 
 ## 📄 Lisensi  
 Tim BuBaDiBaKo - MIA 2025
-(T. Farhan Nadlir E.Q, Ernilla Syahfaliza, Abib Yolian)
+(Ernilla Syahfaliza, T. Farhan Sultan Nadlir E.Q, Abib Yolian)
