@@ -1,5 +1,3 @@
-# README.md
-
 # 🚀 UMKM-i: Direktori UMKM Modern
 
 
