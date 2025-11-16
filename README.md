@@ -1,73 +1,107 @@
-# React + TypeScript + Vite
+# README.md
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🚀 UMKM-i: Direktori UMKM Modern
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo  
+➡️ *https://umkm-app-phi.vercel.app/*
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Fitur Utama
 
-## Expanding the ESLint configuration
+### 1. 💨 Performa & Pemuatan
+- Splash Screen "No-JS" animasi 3 titik (CSS murni).
+- Halaman transisi halus (Framer Motion).
+- Scroll reveal animasi fade-in + slide-up.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. 📱 Navigasi & UX
+- Navbar berubah dari transparan → solid.
+- Search bar pintar (random suggestion, live result, keyboard nav).
+- Dropdown modern (desktop & mobile).
+- Tombol “Back to Top” dengan smooth scrolling.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 3. 🖥️ Halaman Utama
+- Hero CTA dengan animasi panah.
+- Carousel autoplay + swipe + blur background.
+- Grid kartu simetris (h-full).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 4. ℹ️ Halaman Detail Item (Dinamis)
+- Routing dinamis (/food/... /drink/... /service/...).
+- Layout mobile-first dan desktop.
+- Tab animasi (Framer Motion layoutId).
+- Lightbox modal galeri.
+- Tombol Bagikan (Web Share API) & Hubungi (WhatsApp).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Vite  
+- React 18  
+- TypeScript  
+- Tailwind CSS  
+- React Router DOM  
+- Framer Motion  
+- React Scroll  
+- React Icons  
+- React Intersection Observer  
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 📂 Struktur Folder
+
+/public  
+ ├── /Makanan, /Jasa, /Minuman  
+ └── hero-bg.jpg  
+
+/src  
+ ├── /assets  
+ │   └── /images  
+ ├── /components  
+ │   ├── /layout  
+ │   │   ├── Navbar.tsx  
+ │   │   └── ScrollToTopButton.tsx  
+ │   └── FadeInOnScroll.tsx  
+ ├── /data  
+ │   ├── foodData.ts  
+ │   ├── drinkData.ts  
+ │   └── serviceData.ts  
+ ├── /pages  
+ │   ├── /details  
+ │   │   └── ItemDetailsPage.tsx  
+ │   └── /home  
+ │       ├── HomePage.tsx  
+ │       ├── HeroSection.tsx  
+ │       ├── DisplaySection.tsx  
+ │       ├── InfoSection.tsx  
+ │       ├── FoodSection.tsx  
+ │       ├── DrinkSection.tsx  
+ │       └── ServiceSection.tsx  
+ ├── App.tsx  
+ ├── AnimatedRoutes.tsx  
+ ├── main.tsx  
+ ├── index.css  
+ └── index.html  
+
+---
+
+## ⚙️ Cara Menjalankan Secara Lokal
+
+### 1️⃣ Clone repository  
+git clone https://github.com/farhnsndlr/umkm-app.git  
+cd umkm-app
+
+### 2️⃣ Install dependencies  
+npm install
+
+### 3️⃣ Jalankan development server  
+npm run dev
+
+Buka: http://localhost:5173
+
+---
+
+## 📄 Lisensi  
+Tim BuBaDiBaKo - MIA 2025
+(T. Farhan Nadlir E.Q, Ernilla Syahfaliza, Abib Yolian)
